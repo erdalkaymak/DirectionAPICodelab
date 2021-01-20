@@ -107,6 +107,10 @@ fun drawPolyline(directionResponse: DirectionResponse,hMap:HuaweiMap) {
 }
 <span class="pln"></span></code></pre>
 
+<aside class="special">
+	<p><strong>Note: In this codelab project we are getting the first route only to showing on the map</strong></p>
+</aside>
+
 <p><strong>11. Locate following line in PlaylistCreator.kt </strong></p>
 <pre><div id="copy-button25" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Retrieve local audio files<span class="pln">
 </span></code></pre>

@@ -71,10 +71,10 @@ view.getMyMap()?.moveCamera(update);
 <span class="pln">
 </span>
 <ul>
-  <li><strong>dirReq:</strong>It is used as direction request with origin and destination points.</li>
-  <li><strong>directionType:</strong>It is used as direction type such as walking, driving and bicycling.</li>
-  <li><strong>hMap:</strong>It is used as Huawei Map object.</li>
-  <li><strong>callBack:</strong>It is used as IVolley object to getting response from fragment.</li>
+  <li><strong>dirReq: </strong>It is used as direction request with origin and destination points.</li>
+  <li><strong>directionType: </strong>It is used as direction type such as walking, driving and bicycling.</li>
+  <li><strong>hMap: </strong>It is used as Huawei Map object.</li>
+  <li><strong>callBack: </strong>It is used as IVolley object to getting response from fragment.</li>
 </ul>
 <span class="pln">
 </span>
@@ -134,10 +134,10 @@ context?.let {
 </span></code></pre>
 
 <ul>
-  <li><strong>DirectionType.Walk.type:</strong>It is used as for getting “walking” value to sending request with walk rotation.</li>
-  <li><strong>directionResponse:</strong>This response is returned when the request is sent. When using Volley Library for post request should send request and getting response with this.</li>
-  <li><strong>directionAdapter:</strong>It is used as the  DirectionsAdapter instance for filling Recycler View with response of all steps.</li>
-  <li><strong>callBack:</strong>It is used as IVolley object to getting response from fragment.</li>
+  <li><strong>DirectionType.Walk.type: </strong>It is used as for getting “walking” value to sending request with walk rotation.</li>
+  <li><strong>directionResponse: </strong>This response is returned when the request is sent. When using Volley Library for post request should send request and getting response with this.</li>
+  <li><strong>directionAdapter: </strong>It is used as the  DirectionsAdapter instance for filling Recycler View with response of all steps.</li>
+  <li><strong>callBack: </strong>It is used as IVolley object to getting response from fragment.</li>
 </ul>
 
 <p><strong>13. Locate following line in DirectionsAdapter.kt</strong></p>
@@ -157,9 +157,9 @@ override fun onBindViewHolder(holder: DirectionsHolder, position: Int) {
 </span></code></pre>
 
 <ul>
-  <li><strong>instruction:</strong>: It is used as step instruction. It is using when getting the map instructions to one place to another place.</li>
-  <li><strong>distanceText:</strong>It used as showing the step distance. It is the distance between two steps with meter. For example 100 m etc.</li>
-  <li><strong>durationText:</strong>It is used as showing the step duration. It is the duration between two steps with minute. For example 1 min etc.</li>
-  <li><strong>stepAction:</strong>It is used as going to step with action. For example turn right, turn left etc.</li>
+  <li><strong>instruction: </strong>: It is used as step instruction. It is using when getting the map instructions to one place to another place.</li>
+  <li><strong>distanceText: </strong>It used as showing the step distance. It is the distance between two steps with meter. For example 100 m etc.</li>
+  <li><strong>durationText: </strong>It is used as showing the step duration. It is the duration between two steps with minute. For example 1 min etc.</li>
+  <li><strong>stepAction: </strong>It is used as going to step with action. For example turn right, turn left etc.</li>
 </ul>
 </span></code></pre>

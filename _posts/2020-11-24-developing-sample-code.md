@@ -1,5 +1,5 @@
 ---
-title: Initialize Audio Kit SDK and Play Audio
+title: Complete the Essentials in the Code 
 description: 15
 ---
 
@@ -109,68 +109,57 @@ fun drawPolyline(directionResponse: DirectionResponse,hMap:HuaweiMap) {
 <aside class="special">
 	<p><strong>Note: In this codelab project we are getting the first route only to showing on the map</strong></p>
 </aside>
-<p><strong>11. Locate following line in PlaylistCreator.kt </strong></p>
-<pre><div id="copy-button25" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Retrieve local audio files<span class="pln">
+<p><strong>11. Locate following line in *Presenter.kt classes </strong></p>
+<pre><div id="copy-button25" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: For sending post request from fragment in onMapReady callback function <span class="pln">
 </span></code></pre>
-<p><strong>12. Retrieve local audio files that matches our criteria</strong></p>
+<p><strong>12. For sending post request</strong></p>
 <pre><div id="copy-button26" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
-val songItem = HwAudioPlayItem()
-songItem.audioTitle = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME))
-songItem.audioId = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)).toString() + ""
-songItem.filePath = path
-songItem.setOnline(0) //0 means local
-songItem.setIsOnline(0) //0 means local
-if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-    songItem.duration = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION))
-} else songItem.setDuration(0)
-songItem.singer = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST))
-playItemList.add(songItem)<span class="pln">
+context?.let {
+    view.getMyMap().let { it1 ->
+        if (it1 != null) {
+            MyVolleyRequest.getInstance(it, this).postRequest(
+                dirReq, DirectionType.WALK.type,
+                it1, object : IVolley {
+                    override fun onSuccess(directionResponse: DirectionResponse) {
+                      mdirectionResponse = directionResponse
+                      view.showAllSteps(mdirectionResponse!!)
+                      PolylineHelper().drawPolyline(mdirectionResponse!!,view.getMyMap()!!)
+                    }
+                }
+            )
+        }
+    }
+}
+<span class="pln">
 </span></code></pre>
 
-<p><strong>13. Locate following line in PlaylistCreator.kt</strong></p>
-<pre><div id="copy-button27" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Retrieve an online playlist<span class="pln">
+<ul>
+  <li><strong>DirectionType.Walk.type:</strong>It is used as for getting “walking” value to sending request with walk rotation.</li>
+  <li><strong>directionResponse:</strong>This response is returned when the request is sent. When using Volley Library for post request should send request and getting response with this.</li>
+  <li><strong>directionAdapter:</strong>It is used as the  DirectionsAdapter instance for filling Recycler View with response of all steps.</li>
+  <li><strong>callBack:</strong>It is used as IVolley object to getting response from fragment.</li>
+</ul>
+
+<p><strong>13. Locate following line in DirectionsAdapter.kt</strong></p>
+<pre><div id="copy-button27" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Creating DirectionsAdapter for showing route steps<span class="pln">
 </span></code></pre>
-<p><strong>14. Retrieve an online playlist of your selection</strong></p>
+<p><strong>14. Creating adapter for showing directions route steps</strong></p>
 <pre><div id="copy-button28" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
-val audioPlayItem1 = HwAudioPlayItem()
-audioPlayItem1.audioId = "1000"
-audioPlayItem1.singer = "Sample MP3 - Need lower bandwidth"
-audioPlayItem1.onlinePath = "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3"
-//Links are examples, you may use any links you want
-//Please beware the copyright issues
-audioPlayItem1.setOnline(1)
-audioPlayItem1.audioTitle = "Kalimba - MP3"
-playItemList.add(audioPlayItem1)
-val audioPlayItem2 = HwAudioPlayItem()
-audioPlayItem2.audioId = "1001"
-audioPlayItem2.singer = "Sample FLAC - Need higher bandwidth"
-audioPlayItem2.onlinePath = "https://www.learningcontainer.com/wp-content/uploads/2020/02/Sample-FLAC-File.flac"
-audioPlayItem2.setOnline(1)
-audioPlayItem2.audioTitle = "Kalimba - FLAC"
-playItemList.add(audioPlayItem2)<span class="pln">
+override fun onBindViewHolder(holder: DirectionsHolder, position: Int) {
+    val step: Step? = steps[position]
+    if (step != null) {
+        holder.actionDescription.text = step.instruction
+        holder.actionDistanceTime.text = context.getString(R.string.distance_time,step.distanceText,step.durationText)
+        when(step.action){
+            DirectionActionType.STRAIGHT.type-> holder.actionImage.setImageDrawable(context.resources.getDrawable(R.drawable.ic_go,null))
+…
+<span class="pln">
 </span></code></pre>
 
-<p><strong>15. Locate following line in AudioActivity.kt</strong></p>
-<pre><div id="copy-button29" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Implement the play button<span class="pln">
-</span></code></pre>
-<p><strong>16. Implement the play button both visually and functionally</strong></p>
-<pre><div id="copy-button30" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
-binding!!.playButtonImageView.setOnClickListener {
-  if (binding!!.playButtonImageView.drawable.constantState == drawablePlay!!.constantState) {
-      if (mHwAudioPlayerManager != null) {
-          mHwAudioPlayerManager!!.play()
-          binding!!.playButtonImageView.setImageDrawable(getDrawable(R.drawable.btn_playback_pause_normal))
-          isReallyPlaying = true
-      }
-  } 
-  else if (binding!!.playButtonImageView.drawable.constantState == drawablePause!!.constantState) {
-      if (mHwAudioPlayerManager != null) {
-          mHwAudioPlayerManager!!.pause()
-          binding!!.playButtonImageView.setImageDrawable(getDrawable(R.drawable.btn_playback_play_normal))
-          isReallyPlaying = false
-      }
-  }
-    //Other button implementation are very similar, please check the rest of the code
-    //Also, please notice that this outer method (handleOnClicks()) is called in onCreate() method
-}<span class="pln">
+<ul>
+  <li><strong>instruction:</strong>: It is used as step instruction. It is using when getting the map instructions to one place to another place.</li>
+  <li><strong>distanceText:</strong>It used as showing the step distance. It is the distance between two steps with meter. For example 100 m etc.</li>
+  <li><strong>durationText:</strong>It is used as showing the step duration. It is the duration between two steps with minute. For example 1 min etc.</li>
+  <li><strong>stepAction:</strong>It is used as going to step with action. For example turn right, turn left etc.</li>
+</ul>
 </span></code></pre>

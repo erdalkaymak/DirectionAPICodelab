@@ -24,29 +24,51 @@ override fun addMarkerToMap(lat: Double, lot: Double, title: String, snippet: St
 </span></code></pre>
 <p><strong>4. Call the addMarkerToMap function onMapReady call back to add marker on certain position</strong></p>
 <pre><div id="copy-button13" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> addMarkerToMap(origin.lat, origin.lng, "Origin", "Start Point",null)
-        addMarkerToMap(destination.lat, destination.lng, "Destination", "End Point",BitmapDescriptorFactory.fromResource(R.drawable.finish_flag_96))<span class="pln">
+ addMarkerToMap(destination.lat, destination.lng, "Destination", "End Point",BitmapDescriptorFactory.fromResource(R.drawable.finish_flag_96))<span class="pln">
 </span></code></pre>
 
-<aside class="special">
-	<p><strong>Note: AsyncTask is currently deprecated, please use other threading methods if you care about modernity in your application.</strong></p>
-</aside>
-
-<p><strong>5. Locate following line in AudioActivity.kt</strong></p>
-<pre><div id="copy-button19" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Implement onSongChange method of the listener<span class="pln">
+<p><strong>5. Locate following line in *Presenter.kt classes</strong></p>
+<pre><div id="copy-button19" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Setting camera coordinates and moving camera on Huawei Map<span class="pln">
 </span></code></pre>
-<p><strong>6. Implement the onSongChange method of the listener</strong></p>
+<p><strong>6. Setting coordinates and moving camera</strong></p>
 <pre><div id="copy-button20" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
-if(hwAudioPlayItem != null)
-    setSongDetails(hwAudioPlayItem) //just update the song details everytime a song changes
-if (mHwAudioPlayerManager!!.offsetTime != -1L && mHwAudioPlayerManager!!.duration != -1L) 
-    updateSeekBar(mHwAudioPlayerManager!!.offsetTime, mHwAudioPlayerManager!!.duration) //also update seekbar if needed<span class="pln">
+val update = CameraUpdateFactory.newLatLngZoom(
+    LatLng(
+        origin.lat,
+        origin.lng
+    ), 11f
+)
+view.getMyMap()?.moveCamera(update);
+<span class="pln">
 </span></code></pre>
 
-<p><strong>7. Locate following line in AudioActivity.kt</strong></p>
-<pre><div id="copy-button21" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Implement onPlayProgress method of the listener<span class="pln">
+<p><strong>7. Locate following line in MyVolleyRequest.kt</strong></p>
+<pre><div id="copy-button21" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: postRequest function to sending request and getting response <span class="pln">
 </span></code></pre>
-<p><strong>8. Implement onPlayProgress method of the listener</strong></p>
-<pre><div id="copy-button22" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>updateSeekBar(currentPosition, duration) //just update the seekbar as this method is called everytime the song progresses<span class="pln">
+<p><strong>8. Create postRequest function to sending request and getting response</strong></p>
+<pre><div id="copy-button22" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>fun postRequest(dirReq: String, directionType: String,hMap:HuaweiMap,callBack:IVolley){
+    val gson = Gson()
+    // creating Error Listener
+    val err =
+        Response.ErrorListener {
+                error -> Log.d("ERROR", "onErrorResponse: " + error.message) }
+    // creating Response Listener
+    val res: Response.Listener&ltJSONObject&gt =
+        Response.Listener {
+                response ->
+          val mdirectionResponse =
+                gson.fromJson(response.toString(), DirectionResponse::class.java)
+            Log.d("mapres", "onResponse: $response")
+            callBack.onSuccess(mdirectionResponse)
+        }
+    val jsonObjectRequest: JsonObjectRequest =
+        object : JsonObjectRequest(Method.POST, getUrl(directionType), JSONObject(dirReq),
+            res , err) {}
+
+    // add post request to queue
+    addToRequestQueue(jsonObjectRequest)
+}
+<span class="pln">
 </span></code></pre>
 
 <p><strong>9. Locate following line in AudioActivity.kt</strong></p>

@@ -5,6 +5,7 @@ description: 5
 
 <p>You can download the codelab project from: <a href="https://codehub-dg-g.huawei.com/hms---turkey-dtse-branch/team-c9/directionapidemo.git" target="_blank">https://codehub-dg-g.huawei.com/hms---turkey-dtse-branch/team-c9/directionapidemo.git</a></p>
 
+
 <h2><strong>Creating a Project</strong></h2>
 <p><strong>Step 1</strong>: Start Android Studio.</p>
 <p><strong>Step 2</strong>: Choose <strong>File</strong> &gt; <strong>Open</strong>, go to the directory where the sample project is decompressed, and click <strong>OK</strong>.<br><img style="width: 376.00px" src="https://raw.githubusercontent.com/erdalkaymak/DirectionAPICodelab/master/assets/direction_api.PNG" onclick="imageclick(src)"></p>

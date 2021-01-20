@@ -1,147 +1,125 @@
 ---
-title: Create Wiseplayer and Play Video
+title: Initialize Audio Kit SDK and Play Audio
 description: 15
 ---
 
-<p><strong>1. Locate following line to create the Wise Player Factory instance in WisePlayerInit Object.</strong></p>
-<pre><div id="copy-button10" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>    //TODO Initializing of Wise Player Factory
+<p><strong>1. Locate following line in *Presenter.kt classes </strong></p>
+<pre><div id="copy-button10" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Locate the TODO for adding a marker to Huawei Map with hMap instance<span class="pln">
+</span></code></pre>
+<p><strong>2. Adding a marker to Huawei Map</strong></p>
+<pre><div id="copy-button11" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
+override fun addMarkerToMap(lat: Double, lot: Double, title: String, snippet: String,descriptor:BitmapDescriptor?) {
+    view.getMyMap()?.addMarker(
+        MarkerOptions()
+            .title(title)
+            .snippet(snippet)
+            .position(LatLng(lat, lot)).icon(descriptor)
+    )
+}
 <span class="pln">
 </span></code></pre>
-<p><strong>2. Create the Wise Player Factory instance</strong></p>
-<pre><div id="copy-button11" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>    val factoryOptions = WisePlayerFactoryOptions.Builder().setDeviceId("xxx").build()
-    // In the multi-process scenario, the onCreate method in Application is called multiple times.
-    // The app needs to call the WisePlayerFactory.initFactory() API in the onCreate method of the app process (named "app package name") 
-    // and WisePlayer process (named "app package name:player").
-    WisePlayerFactory.initFactory(context, factoryOptions, object : InitFactoryCallback {
-        override fun onSuccess(factory: WisePlayerFactory) {
-            wisePlayerFactory = factory
-        }
-        override fun onFailure(errorCode: Int, msg: String) {
-            Log.d("WisePlayerInit", "onFailure: $errorCode - $msg")
-        }
-    })
-<span class="pln">
+
+<p><strong>3. Locate following line in *Presenter.kt classes</strong></p>
+<pre><div id="copy-button12" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Call the function onMapReady call back<span class="pln">
 </span></code></pre>
-<p>Description of <strong>Wise Player Factory</strong> is as following:<br></p>
-<table style="width: 100%;table-layout: fixed;">
-	<tbody><tr></tr>
-	<tr><td colspan="1" rowspan="1"><p>Parameter</p>
-	</td><td colspan="1" rowspan="1"><p>Type:</p>
-	</td><td colspan="1" rowspan="1"><p>Mandatory or Not</p>
-	</td><td colspan="1" rowspan="1"><p>Description</p>
-	</td></tr>
-	<tr><td colspan="1" rowspan="1"><p>context</p>
-	</td><td colspan="1" rowspan="1"><p>Context</p>
-	</td><td colspan="1" rowspan="1"><p>M</p>
-	</td><td colspan="1" rowspan="1"><p>Android context object, which is not set to null.</p>
-	</td></tr>
-	<tr><td colspan="1" rowspan="1"><p>options</p>
-	</td><td colspan="1" rowspan="1"><p>Integer</p>
-	</td><td colspan="1" rowspan="1"><p>M</p>
-	</td><td colspan="1" rowspan="1"><p>Instance of the WisePlayer factory class initialization option <a href="https://developer.huawei.com/consumer/en/doc/HMSCore-References-V5/wpf-options-0000001050439397-V5" target="_blank">WisePlayerFactoryOptions</a></p>
-	</td></tr>
-	<tr><td colspan="1" rowspan="1"><p>callback</p>
-	</td><td colspan="1" rowspan="1"><p>Object</p>
-	</td><td colspan="1" rowspan="1"><p>M</p>
-	</td><td colspan="1" rowspan="1"><p>Instance of the <a href="https://developer.huawei.com/consumer/en/doc/HMSCore-References-V5/init-factory-callback-0000001050199187-V5" target="_blank">InitFactoryCallback API</a> for initializing the WisePlayer factory class.</p>
-	</td></tr>
-</tbody></table>
-<p><strong>3. Locate following line and set the EditTexts Urls in MainActivity to play related buttons</strong></p>
-<pre><div id="copy-button12" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>   // TODO Set video Url or Urls
-<span class="pln">
+<p><strong>4. Call the addMarkerToMap function onMapReady call back to add marker on certain position</strong></p>
+<pre><div id="copy-button13" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> addMarkerToMap(origin.lat, origin.lng, "Origin", "Start Point",null)
+        addMarkerToMap(destination.lat, destination.lng, "Destination", "End Point",BitmapDescriptorFactory.fromResource(R.drawable.finish_flag_96))<span class="pln">
 </span></code></pre>
-<p><strong>4.Set the EditTexts Urls </strong></p>
-<pre><div id="copy-button13" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> edtUrl.setText(resources.getString(R.string.single_url))
- edtMultipleUrl.setText(resources.getString(R.string.multiple_url))
- <span class="pln">
-</span></code></pre>
-<p><strong>5. Locate following line and create Wise Player Instance in WisePlayerInit Object. </strong></p>
-<pre><div id="copy-button14" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  // TODO Initializing of Wise Player Instance
-<span class="pln">
-</span></code></pre>
-<p><strong>6. Create Wise Player Instance</strong></p>
-<pre><div id="copy-button15" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  return wisePlayerFactory.createWisePlayer()
-<span class="pln">
-</span></code></pre>
+
 <aside class="special">
-	<p><strong>Note: Frame Layout is necessary for SurfaceView to display videos, otherwise only audio will be listened</strong></p>
+	<p><strong>Note: AsyncTask is currently deprecated, please use other threading methods if you care about modernity in your application.</strong></p>
 </aside>
-<br><img style="width: 400.00px" src="https://raw.githubusercontent.com/bekiryavuzkoc/testRepo/gh-pages/assets/framelayout.PNG" onclick="imageclick(src)">
-<p><strong>7. Locate following line in Play Activity.</strong></p>
-<pre><div id="copy-button17" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Setting the Listeners
-<span class="pln">
+
+<p><strong>5. Locate following line in AudioActivity.kt</strong></p>
+<pre><div id="copy-button19" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Implement onSongChange method of the listener<span class="pln">
 </span></code></pre>
-<p><strong>8. Set listeners in Play Activity.</strong></p>
-<pre><div id="copy-button18" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  player.setReadyListener(this)
-  player.setErrorListener(this)
-  player.setEventListener(this)
-  player.setResolutionUpdatedListener(this)
-  player.setLoadingListener(this)
-  player.setPlayEndListener(this)
-  player.setSeekEndListener(this)
-  <span class="pln">
+<p><strong>6. Implement the onSongChange method of the listener</strong></p>
+<pre><div id="copy-button20" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
+if(hwAudioPlayItem != null)
+    setSongDetails(hwAudioPlayItem) //just update the song details everytime a song changes
+if (mHwAudioPlayerManager!!.offsetTime != -1L && mHwAudioPlayerManager!!.duration != -1L) 
+    updateSeekBar(mHwAudioPlayerManager!!.offsetTime, mHwAudioPlayerManager!!.duration) //also update seekbar if needed<span class="pln">
 </span></code></pre>
-<p><strong>9. Locate following line in Play Activity.</strong></p>
-<pre><div id="copy-button19" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO Callback Listener
-<span class="pln">
+
+<p><strong>7. Locate following line in AudioActivity.kt</strong></p>
+<pre><div id="copy-button21" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Implement onPlayProgress method of the listener<span class="pln">
 </span></code></pre>
-<p><strong>10. Set the Callback Listener in Play Activity.</strong></p>
-<pre><div id="copy-button20" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  surfaceView.holder.addCallback(this)
-<span class="pln">
+<p><strong>8. Implement onPlayProgress method of the listener</strong></p>
+<pre><div id="copy-button22" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>updateSeekBar(currentPosition, duration) //just update the seekbar as this method is called everytime the song progresses<span class="pln">
 </span></code></pre>
-<p><strong>11. Locate following line in Play Activity.</strong></p>
-<pre><div id="copy-button21" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO Callback Listener
-<span class="pln">
+
+<p><strong>9. Locate following line in AudioActivity.kt</strong></p>
+<pre><div id="copy-button23" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Implement the song progress on Audio Kit manager<span class="pln">
 </span></code></pre>
-<p><strong>12. Set the Seekbar Listener in Play Activity.</strong></p>
-<pre><div id="copy-button22" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  seekBar.setOnSeekBarChangeListener(this)
-<span class="pln">
+<p><strong>10. Implement the song progress on Audio Kit manager</strong></p>
+<pre><div id="copy-button24" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
+if (mHwAudioPlayerManager != null && fromUser) {
+    mHwAudioPlayerManager!!.seekTo(progress * 1000)
+}<span class="pln"></span></code></pre>
+
+<p><strong>11. Locate following line in PlaylistCreator.kt </strong></p>
+<pre><div id="copy-button25" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Retrieve local audio files<span class="pln">
 </span></code></pre>
-<p><strong>13. Locate following line in Play Activity.</strong></p>
-<pre><div id="copy-button23" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Starting the Player
-	<span class="pln">
+<p><strong>12. Retrieve local audio files that matches our criteria</strong></p>
+<pre><div id="copy-button26" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
+val songItem = HwAudioPlayItem()
+songItem.audioTitle = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME))
+songItem.audioId = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)).toString() + ""
+songItem.filePath = path
+songItem.setOnline(0) //0 means local
+songItem.setIsOnline(0) //0 means local
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+    songItem.duration = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION))
+} else songItem.setDuration(0)
+songItem.singer = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST))
+playItemList.add(songItem)<span class="pln">
 </span></code></pre>
-<p><strong>14. Start Wise Player in Play Activity.</strong></p>
-<pre><div id="copy-button24" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  player?.start()
-<span class="pln">
+
+<p><strong>13. Locate following line in PlaylistCreator.kt</strong></p>
+<pre><div id="copy-button27" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Retrieve an online playlist<span class="pln">
 </span></code></pre>
-<p><strong>15. Locate following line in Play Activity. </strong></p>
-<pre><div id="copy-button25" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Surface Change
-<span class="pln">
+<p><strong>14. Retrieve an online playlist of your selection</strong></p>
+<pre><div id="copy-button28" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
+val audioPlayItem1 = HwAudioPlayItem()
+audioPlayItem1.audioId = "1000"
+audioPlayItem1.singer = "Sample MP3 - Need lower bandwidth"
+audioPlayItem1.onlinePath = "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3"
+//Links are examples, you may use any links you want
+//Please beware the copyright issues
+audioPlayItem1.setOnline(1)
+audioPlayItem1.audioTitle = "Kalimba - MP3"
+playItemList.add(audioPlayItem1)
+val audioPlayItem2 = HwAudioPlayItem()
+audioPlayItem2.audioId = "1001"
+audioPlayItem2.singer = "Sample FLAC - Need higher bandwidth"
+audioPlayItem2.onlinePath = "https://www.learningcontainer.com/wp-content/uploads/2020/02/Sample-FLAC-File.flac"
+audioPlayItem2.setOnline(1)
+audioPlayItem2.audioTitle = "Kalimba - FLAC"
+playItemList.add(audioPlayItem2)<span class="pln">
 </span></code></pre>
-<p><strong>16. Set surface change to Wise Player.</strong></p>
-<pre><div id="copy-button26" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  player.setSurfaceChange()
-<span class="pln">
+
+<p><strong>15. Locate following line in AudioActivity.kt</strong></p>
+<pre><div id="copy-button29" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Implement the play button<span class="pln">
 </span></code></pre>
-<p><strong>17. Locate following line in Play Activity. </strong></p>
-<pre><div id="copy-button27" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Surface Destroy
-<span class="pln">
-</span></code></pre>
-<p><strong>18. Suspend the Wise Player if surface is destroyed.</strong></p>
-<pre><div id="copy-button28" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  player.suspend()
-<span class="pln">
-</span></code></pre>
-<p><strong>19. Locate following line in Play Activity. </strong></p>
-<pre><div id="copy-button29" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Surface Create
-<span class="pln">
-</span></code></pre>
-<p><strong>20. Resume Wise Player with the current time when app is sent to foreground.</strong></p>
-<pre><div id="copy-button30" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  player.setView(surfaceView)
-  player.resume(PlayerConstants.ResumeType.KEEP)
-<span class="pln">
-</span></code></pre>
-<p><strong>21. Locate following line in Play Activity.</strong></p>
-<pre><div id="copy-button31" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Release Wise Player
-<span class="pln">
-</span></code></pre>
-<p><strong>22. Release Wise Player and listeners in Play Activity. </strong></p>
-<pre><div id="copy-button32" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  player.setErrorListener(null)
-  player.setEventListener(null)
-  player.setResolutionUpdatedListener(null)
-  player.setReadyListener(null)
-  player.setLoadingListener(null)
-  player.setPlayEndListener(null)
-  player.setSeekEndListener(null)
-  player.release()
-<span class="pln">
+<p><strong>16. Implement the play button both visually and functionally</strong></p>
+<pre><div id="copy-button30" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
+binding!!.playButtonImageView.setOnClickListener {
+  if (binding!!.playButtonImageView.drawable.constantState == drawablePlay!!.constantState) {
+      if (mHwAudioPlayerManager != null) {
+          mHwAudioPlayerManager!!.play()
+          binding!!.playButtonImageView.setImageDrawable(getDrawable(R.drawable.btn_playback_pause_normal))
+          isReallyPlaying = true
+      }
+  } 
+  else if (binding!!.playButtonImageView.drawable.constantState == drawablePause!!.constantState) {
+      if (mHwAudioPlayerManager != null) {
+          mHwAudioPlayerManager!!.pause()
+          binding!!.playButtonImageView.setImageDrawable(getDrawable(R.drawable.btn_playback_play_normal))
+          isReallyPlaying = false
+      }
+  }
+    //Other button implementation are very similar, please check the rest of the code
+    //Also, please notice that this outer method (handleOnClicks()) is called in onCreate() method
+}<span class="pln">
 </span></code></pre>

@@ -64,21 +64,49 @@ view.getMyMap()?.moveCamera(update);
     val jsonObjectRequest: JsonObjectRequest =
         object : JsonObjectRequest(Method.POST, getUrl(directionType), JSONObject(dirReq),
             res , err) {}
-
-    // add post request to queue
     addToRequestQueue(jsonObjectRequest)
 }
 <span class="pln">
 </span></code></pre>
-
-<p><strong>9. Locate following line in AudioActivity.kt</strong></p>
-<pre><div id="copy-button23" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Implement the song progress on Audio Kit manager<span class="pln">
+<span class="pln">
+</span>
+<ul>
+  <li><strong>dirReq:</strong>It is used as direction request with origin and destination points.</li>
+  <li><strong>directionType:</strong>It is used as direction type such as walking, driving and bicycling.</li>
+  <li><strong>hMap:</strong>It is used as Huawei Map object.</li>
+  <li><strong>callBack:</strong>It is used as IVolley object to getting response from fragment.</li>
+</ul>
+<span class="pln">
+</span>
+<p><strong>9. Locate following line in PolylineHelper.kt</strong></p>
+<pre><div id="copy-button23" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: For drawing polyline on the map with response from postRequest<span class="pln">
 </span></code></pre>
-<p><strong>10. Implement the song progress on Audio Kit manager</strong></p>
+<p><strong>10. Drawing polyline on map.</strong></p>
 <pre><div id="copy-button24" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
-if (mHwAudioPlayerManager != null && fromUser) {
-    mHwAudioPlayerManager!!.seekTo(progress * 1000)
-}<span class="pln"></span></code></pre>
+fun drawPolyline(directionResponse: DirectionResponse,hMap:HuaweiMap) {
+    val pathList : ArrayList<LatLng> = arrayListOf()
+    if (directionResponse.routes != null && directionResponse.routes!!.isNotEmpty()){
+        val route = directionResponse.routes!![0]
+        if (route.paths != null){
+            for (i in route.paths!!){
+                val path = i
+                if (path.steps != null) {
+                    for (j in path.steps!!){
+                        if (j.polyline != null && j.polyline!!.isNotEmpty()){
+                            for (k in j.polyline!!){
+                                pathList.add(LatLng(k.lat!!,k.lng!!))
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+   mPolyline = hMap.addPolyline(
+   PolylineOptions().addAll(pathList).color(Color.BLUE).width(4f))
+}
+<span class="pln"></span></code></pre>
 
 <p><strong>11. Locate following line in PlaylistCreator.kt </strong></p>
 <pre><div id="copy-button25" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code> //TODO: Retrieve local audio files<span class="pln">

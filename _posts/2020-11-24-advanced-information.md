@@ -1,35 +1,12 @@
 ---
-title: Advanced Features
-description: 5
+title: Additional Information
+description: 1
 ---
 
-<ol type="1">
-  <li><h3>Seekbar:</h3></li>
-  <p>With the feature of Seekbar, displayed video can be rewound or forwarded. With Wise Player's seek feature videos can be played from a specified time.</p>
-  
-<p><strong>1. Locate following line in Play Activity.</strong></p>
-<pre><div id="copy-button33" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Seekbar Change
-<span class="pln">
-</span></code></pre>
-<p><strong>2. Implement the Wise Player’s seek method.</strong></p>
-<pre><div id="copy-button34" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  seekBar?.progress?.let {player.seek(it)}
-<span class="pln">
-</span></code></pre>
+<p>This project has been developed with MVP design pattern. Please check the interface, presenter and activity classes are generated for each feature. In interface classes, presenter and view interfaces are defined. With the presenter object that initialized in activity classes, the methods will be called where actual work has been done to use Huawei Map SDK with Direction API capabilities. In this way, logic dependency will be removed from activity classes. These methods are generated inside presenter classes.</p>
 
- <li><h3>Handler and Runnable:</h3></li>
-<p>A Handler allows you to send and process Message and Runnable objects associated with a thread's MessageQueue. With the feature of Handler, we can update the UI elements for every 1 seconds.</p>
-<p><strong>1. Locate following line in Play Activity.</strong></p>
-<pre><div id="copy-button35" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>  //TODO Handler and Runnable Implementation
-<span class="pln">
-</span></code></pre>
-<p><strong>2. Implement the Wise Player’s seek method.</strong></p>
-<pre><div id="copy-button36" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>        //Player UI
-        configureControlView()
-        //Text UI Elements 
-        configureContentView()
-        if (!mStopHandler) {
-            mHandler.postDelayed(runnable, DELAY_SECOND)
-        }
-        <span class="pln">
-</span></code></pre>
-</ol>
+<p>In presenter classes, view objects have been defined. Override methods will be called inside presenter classes through view objects to take user actions. For example, when user choose walking tab steps are showed, this steps are obtained inside presenter class with using view object. In other words, presenter provides the desired results for UI while view is taking the user action.</p>
+
+<p>This architecture enables to provide maintainable and adaptable design for users. You can build up your app based on it and use the demo to shape your usage of Map Kit.</p>
+  
+

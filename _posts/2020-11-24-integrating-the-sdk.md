@@ -2,7 +2,6 @@
 title: Set up the Project
 description: 5
 ---
-
 <p>You can download the codelab project from: <a href="https://codehub-dg-g.huawei.com/hms---turkey-dtse-branch/team-c9/directionapidemo.git" target="_blank">https://codehub-dg-g.huawei.com/hms---turkey-dtse-branch/team-c9/directionapidemo.git</a></p>
 
 

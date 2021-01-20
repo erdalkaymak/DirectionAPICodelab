@@ -162,4 +162,3 @@ override fun onBindViewHolder(holder: DirectionsHolder, position: Int) {
   <li><strong>durationText: </strong>It is used as showing the step duration. It is the duration between two steps with minute. For example 1 min etc.</li>
   <li><strong>stepAction: </strong>It is used as going to step with action. For example turn right, turn left etc.</li>
 </ul>
-</span></code></pre>

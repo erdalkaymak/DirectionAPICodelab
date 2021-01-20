@@ -3,7 +3,7 @@ title: "Introduction"
 description: 1
 ---
 
-<huawei-codelab-about codelab-title="Huawei Audio Kit" last-updated="2020-12-22T13:20:13-07:00" authors="Huawei Codelab Team">
+<huawei-codelab-about codelab-title="Map Kit - Direction API" last-updated="2020-12-22T13:20:13-07:00" authors="Huawei Codelab Team">
 <div class="codelab-title">
 <div class="token">Map Kit - Direction API</div></div>
 <div class="about-card">

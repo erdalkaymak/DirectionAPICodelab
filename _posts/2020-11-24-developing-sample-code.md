@@ -84,7 +84,7 @@ view.getMyMap()?.moveCamera(update);
 <p><strong>10. Drawing polyline on map.</strong></p>
 <pre><div id="copy-button24" class="copy-btn" title="Copy" onclick="copyCode(this.id)"></div><code>
 fun drawPolyline(directionResponse: DirectionResponse,hMap:HuaweiMap) {
-    val pathList : ArrayList<LatLng> = arrayListOf()
+    val pathList : ArrayList&ltLatLng&gt = arrayListOf()
     if (directionResponse.routes != null && directionResponse.routes!!.isNotEmpty()){
         val route = directionResponse.routes!![0]
         if (route.paths != null){

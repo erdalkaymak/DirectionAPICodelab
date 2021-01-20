@@ -8,16 +8,10 @@ description: 2
 
 <ol type="1">
 	<li>Open the app upon installing it to your device.</li>
-	<li>When map is loaded rotations between two markers and showing steps are visible.
-    <p><img style="width: 220.00px" src="https://raw.githubusercontent.com/mustafasurucuu/HmsSiteKitCodelab/master/assets/keywordSearch.png" onclick="imageclick(src)"></p>
-  <li>Choose Nearby Place Search in main screen, press any poi button to see nearby places, you can also type your keyword and press poi button to see related results.
-    <p><img style="width: 220.00px" src="https://raw.githubusercontent.com/mustafasurucuu/HmsSiteKitCodelab/master/assets/nearbySearch_1.png"></p>
-    <p><img style="width: 220.00px" src="https://raw.githubusercontent.com/mustafasurucuu/HmsSiteKitCodelab/master/assets/nearbySearch_2.png"></p></li>
-	<li>Choose Place Detail Search in main screen, enter your site ID, language and press button.
-    <p><img style="width: 220.00px" src="https://raw.githubusercontent.com/mustafasurucuu/HmsSiteKitCodelab/master/assets/placeDetail_1.png"></p>
-    <p><img style="width: 220.00px" src="https://raw.githubusercontent.com/mustafasurucuu/HmsSiteKitCodelab/master/assets/placeDetail_2.png"></p></li>
-  <li>Choose Place Search Suggestion in main screen, enter more than 2 letters in search bar and see the suggested places in cards.
-    <p><img style="width: 220.00px" src="https://raw.githubusercontent.com/mustafasurucuu/HmsSiteKitCodelab/master/assets/searchSuggestion.png"></p></li>
-  <li>Choose Widget in main screen, enter letters for search and see the suggested places. Click one of them on the widget and see details of the place on the card.
-    <p><img style="width: 220.00px" src="https://raw.githubusercontent.com/mustafasurucuu/HmsSiteKitCodelab/master/assets/widget_1.png"></p>
-    <p><img style="width: 220.00px" src="https://raw.githubusercontent.com/mustafasurucuu/HmsSiteKitCodelab/master/assets/widget_2.png"></p></li>
+	 <li> Choose walking tab to see the walking rotations and steps. Total time and total distance have seen under the map with starting road name 
+    <p><img style="width: 220.00px" src="https://raw.githubusercontent.com/erdalkaymak/DirectionAPICodelab/master/assets/walking.jpg" onclick="imageclick(src)"></p></li>
+	<li>Choose driving tab to see the driving rotations and steps. Total time and total distance have seen under the map with starting road name
+    <p><img style="width: 220.00px" src="https://raw.githubusercontent.com/erdalkaymak/DirectionAPICodelab/master/assets/driving.jpg"></p>
+  </li>
+  <li> Choose cycling tab to see the cycling rotations and steps. Total time and total distance have seen under the map with starting road name
+    <p><img style="width: 220.00px" src="https://raw.githubusercontent.com/erdalkaymak/DirectionAPICodelab/master/assets/cycling.jpg"></p></li>

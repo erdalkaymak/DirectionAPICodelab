@@ -95,7 +95,13 @@ fun drawPolyline(directionResponse: DirectionResponse,hMap:HuaweiMap) {
                         if (j.polyline != null && j.polyline!!.isNotEmpty()){
                             for (k in j.polyline!!){
                                 pathList.add(LatLng(k.lat!!,k.lng!!))
-                            }}}}}}}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
    mPolyline = hMap.addPolyline(
    PolylineOptions().addAll(pathList).color(Color.BLUE).width(4f))
 }

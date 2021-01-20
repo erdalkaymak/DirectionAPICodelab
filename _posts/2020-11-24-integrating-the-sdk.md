@@ -3,8 +3,7 @@ title: Set up the Project
 description: 5
 ---
 
-<p>You can download the 
-  project from: <a href="ADD ACTUAL URL TO HERE AND TO THE LINK. URL ITSELF SHOULD DISPLAY HERE!" target="_blank">ADD ACTUAL URL TO HERE AND TO THE LINK. URL ITSELF SHOULD DISPLAY HERE!</a></p>
+<p>You can download the codelab project from: <a href="https://codehub-dg-g.huawei.com/hms---turkey-dtse-branch/team-c9/directionapidemo.git" target="_blank">https://codehub-dg-g.huawei.com/hms---turkey-dtse-branch/team-c9/directionapidemo.git</a></p>
 
 <h2><strong>Creating a Project</strong></h2>
 <p><strong>Step 1</strong>: Start Android Studio.</p>

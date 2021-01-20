@@ -13,7 +13,8 @@ description: 1
 	<strong>Software Requirements</strong>
 </h2>
 <ul>
-	<li>Java JDK 1.8 or later</li>
+  <li>Android Studio 3.x or later version(<a href="https://developer.android.com/studio" target="_blank">Download</a>)</li>
+	<li>Java JDK 1.8 or later(<a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank">Download</a>)</li>
   <li>Android API Level 19 or higher</li>
 	<li>EMUI 3.0 or later</li>
   <li>HMS Core (APK) 4.0.3.300 or later</li>
